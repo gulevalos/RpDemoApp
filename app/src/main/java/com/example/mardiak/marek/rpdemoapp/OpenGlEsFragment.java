@@ -103,6 +103,22 @@ public class OpenGlEsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume()
+    {
+        // The activity must call the GL surface view's onResume() on activity onResume().
+        super.onResume();
+        mGLSurfaceView.onResume();
+    }
+
+    @Override
+    public void onPause()
+    {
+        // The activity must call the GL surface view's onPause() on activity onPause().
+        super.onPause();
+        mGLSurfaceView.onPause();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
