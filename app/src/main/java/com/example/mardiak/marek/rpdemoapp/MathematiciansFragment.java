@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -163,7 +164,7 @@ public class MathematiciansFragment extends Fragment {
 
 
         ActionBar actionBar = mListener.getActionBarFromSupportActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);// search instead of title
 
         AutoCompleteTextView autocompleteView = (AutoCompleteTextView)inflater.inflate(R.layout.action_bar_search, container, false);
 
@@ -175,6 +176,7 @@ public class MathematiciansFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String html = "file:///android_asset/Mathematicians/" + view.getTag() + ".html";
                 mWebView.loadUrl(html);
+                ((InputMethodManager) mListener.getParentContext().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
         });
         actionBar.setCustomView(autocompleteView);

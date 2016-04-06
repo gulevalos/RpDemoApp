@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements EmployeeFragment.
             title = titles[position];
         }
         getSupportActionBar().setTitle(title); //TODO
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
     }
 
     @Override
