@@ -10,6 +10,14 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            moduleName "hello-jni"
+            /*cFlags "-std=c++11 -fexceptions"
+            ldLibs "log"
+            stl "gnustl_shared"
+            abiFilter "armeabi-v7a"*/
+        }
     }
     buildTypes {
         release {

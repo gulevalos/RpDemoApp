@@ -2,11 +2,14 @@ package com.example.mardiak.marek.rpdemoapp;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -28,6 +31,10 @@ public class JniFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    static {
+        System.loadLibrary("hello-jni");
+    }
 
     public JniFragment() {
         // Required empty public constructor
@@ -64,8 +71,25 @@ public class JniFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jni, container, false);
+        View fgView = inflater.inflate(R.layout.fragment_jni, container, false);
+        ((TextView)fgView.findViewById(R.id.jniTextView)).setText(stringFromJNI(Build.DISPLAY));
+        return  fgView;
     }
+
+    public void showToast(String message) {
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(mListener.getParentContext(), message, duration);
+        toast.show();
+    }
+
+    /* A native method that is implemented by the
+ * 'hello-jni' native library, which is packaged
+ * with this application.
+ */
+    public native String  stringFromJNI(String radioVersion);
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -104,5 +128,6 @@ public class JniFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        Context getParentContext();
     }
 }
