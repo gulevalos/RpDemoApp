@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity implements EmployeeFragment.
     @Override
     public Context getParentContext() {
         return this;
+    }
+
+    @Override
+    public ActionBar getActionBarFromSupportActionBar() {
+        return getSupportActionBar();
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
