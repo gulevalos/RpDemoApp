@@ -1,5 +1,6 @@
 package com.example.mardiak.marek.rpdemoapp;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +23,11 @@ public class MainActivity extends AppCompatActivity implements EmployeeFragment.
     @Override
     public void onFragmentInteraction(Uri uri) {
         
+    }
+
+    @Override
+    public Context getParentContext() {
+        return this;
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements EmployeeFragment.
         } else {
             title = titles[position];
         }
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title); //TODO
     }
 
     @Override
