@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -36,28 +35,17 @@ import com.squareup.picasso.Picasso;
  * Activities that contain this fragment must implement the
  * {@link EmployeeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EmployeeFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class EmployeeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     public static final int DEPARTMENT_LOADER_ID = 1;
     public static final int EMPLOYEE_LIST_LOADER_ID = 0;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    ////////////////////////////
     private OnFragmentInteractionListener mListener;
     private SimpleCursorAdapter employeesListAdapter;
     private SimpleCursorAdapter departmentSpinnerAdapter;
 
     private ListView listView;
     private Spinner spinner;
-
 
     @NonNull
     private LoaderManager.LoaderCallbacks<Cursor> createEmployeeListLoaderListener(final Long departmentId) {
@@ -107,7 +95,6 @@ public class EmployeeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Object item = parent.getItemAtPosition(position);
                 if (getLoaderManager().getLoader(EMPLOYEE_LIST_LOADER_ID) == null) {
                     fillEmployeeData(id);
                 } else {
@@ -171,32 +158,10 @@ public class EmployeeFragment extends Fragment {
         listView.setAdapter(employeesListAdapter);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EmployeeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EmployeeFragment newInstance(String param1, String param2) {
-        EmployeeFragment fragment = new EmployeeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -208,13 +173,6 @@ public class EmployeeFragment extends Fragment {
         listView = (ListView) fgView.findViewById(R.id.empList);
         fillDepartmentData();
         return fgView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -264,7 +222,6 @@ public class EmployeeFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
         Context getParentContext();
     }
 }
