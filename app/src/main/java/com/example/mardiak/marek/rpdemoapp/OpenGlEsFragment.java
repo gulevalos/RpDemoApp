@@ -5,10 +5,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.example.mardiak.marek.rpdemoapp.database.JsonImporter;
+import com.example.mardiak.marek.rpdemoapp.database.OrgStructureContentProvider;
 import com.example.mardiak.marek.rpdemoapp.myOpenGl.MyGlSurfaceView;
 
 
@@ -59,6 +65,7 @@ public class OpenGlEsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -118,6 +125,25 @@ public class OpenGlEsFragment extends Fragment {
         super.onPause();
         mGLSurfaceView.onPause();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_opengl, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_change_color:
+                mGLSurfaceView.changeModelColor(new float[]{ 1.0f, 0.2f, 0.2f, 1.0f});
+                Toast.makeText(mListener.getParentContext(), "ColorChanged", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -5,6 +5,7 @@
     <string name="title_top">Top Fragment</string>
     <string name="action_settings">settings</string>
     <string name="action_import_json">import from json</string>
+    <string name="action_change_color">change color</string>
 
     <string-array name="titles">
         <item>Home</item>
