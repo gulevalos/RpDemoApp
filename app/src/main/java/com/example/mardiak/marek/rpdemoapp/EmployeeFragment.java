@@ -126,7 +126,7 @@ public class EmployeeFragment extends Fragment {
                 String[] projection = {DepartmentTable.ID_COLUMN, DepartmentTable.NAME_COLUMN};
                 Uri uri = OrgStructureContentProvider.DEPARTMENTS_ALL_URI;
                 CursorLoader cursorLoader = new CursorLoader(mListener.getParentContext(),
-                        uri, projection, null, null, null);
+                        uri, projection, null, null, DepartmentTable.NAME_COLUMN);
                 return cursorLoader;
             }
 
